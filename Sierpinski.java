@@ -8,11 +8,37 @@ public class Sierpinski {
 	// Draws a Sierpinski triangle of depth n on the standard canvass.
 	public static void sierpinski (int n) {
 		//// Replace this comment with your code
+		double x1 = 0;
+		double y1 = 0;
+		double x2 = 1;
+		double y2 = 0;
+		double x3 = 0.5;
+		double y3 = 0.866025403784438646;
+		StdDraw.setPenColor(StdDraw.BLACK);
+		StdDraw.line(x1, y1, x2, y2);
+		StdDraw.line(x2, y2, x3, y3);
+		StdDraw.line(x3, y3, x1, y1);
+		if( n > 0) sierpinski(n, x1, x2, x3, y1, y2, y3); ;
 	}
 	
 	// Does the actual drawing, recursively.
 	private static void sierpinski(int n, double x1, double x2, double x3,
 		                                 double y1, double y2, double y3) {
+		if( n == 0) return;				
 		//// Replace this comment with your code
+		double xx1 = (x1 + x2) / 2;
+		double yy1 = (y1 + y2) / 2;
+		double xx2 = (x2 + x3) / 2;
+		double yy2 = (y3 + y2) / 2;
+		double xx3 = (x3 + x1) / 2;
+		double yy3 = (y3 + y1) / 2;
+
+		StdDraw.setPenColor(StdDraw.BLACK);
+		StdDraw.line(xx1, yy1, xx2, yy2);
+		StdDraw.line(xx2, yy2, xx3, yy3);
+		StdDraw.line(xx3, yy3, xx1, yy1);
+		sierpinski(n-1, x1, xx1, xx3, y1, yy1, yy3);
+		sierpinski(n-1, xx1, x2, xx2, yy1, y2, yy2);
+		sierpinski(n-1, xx3, xx2, x3, yy3, yy2, y3);						
 	}
 }
